@@ -1,3 +1,8 @@
+# Trabalho de informática, professora Nadya
+# Programa de listas de tarefas em Python
+# Gabriel Victor, Juan Pablo, Kevin Gomes
+
+
 import os
 
 lista = []
@@ -13,38 +18,59 @@ def mostrando_opções():
     print("3- Remover itens")
     print("4- Sair")
 
+
+# Exibe a lista para o usuário, caso vazia, não é exibida
 def listar_itens():
     if not lista:
         print("Nenhum item por aqui.")
     else:
         print("Sua lista: ")
-        for i, lista in enumerate(lista, start=1):
-            print(f"{i}. {lista}")
+        for i, item in enumerate(lista, start=1):
+            print(f"{i}. {item}")
 
-def novos_itens(lista):
-    lista.append(lista)
-    print(f"{lista} adicionado(a) com sucesso!")
 
-def remover_itens(numero):
-    if 0 < numero <= len(lista):
-        item_removido = lista.pop(numero - 1)
-        print(f"Item {item_removido} foi removido com sucesso!")
-    else:
-        print("Esse item na existe na lista!")
+# Adiciona novos itens na lista
+def novos_itens():
+    item = input("Digite o item a ser adicionado: ")
+    lista.append(item)
+    print(f"{item} adicionado(a) com sucesso!")
 
+
+# Antes do usuário remover algum item da lista, o programa exibe a lista para o usuário selecionar o que deseja remover
+def remover_itens():
+    if not lista:
+        print("A lista está vazia. Não há itens para remover.")
+        return
+
+    listar_itens()
+    try:
+        numero = int(input("Digite o número do item a ser removido: "))
+        if 0 < numero <= len(lista):
+            item_removido = lista.pop(numero - 1)
+            print(f"Item {item_removido} foi removido com sucesso!")
+        else:
+            print("Esse item não existe na lista!")
+    except ValueError:
+        print("Digite um número válido.")
+
+
+# Fecha o programa
 def sair():
-    os.system("cls")
+    os.system("cls" if os.name == "nt" else "clear")
     print("Encerrando programa...")
-    exibir_subtitulo("Encerrando o programa")
 
+
+# Caso o usuário não digite algum certo, é exibida uma mensagem de erro
 def erro():
     print("ERRO de opção não encontrada")
 
 def exibir_subtitulo(texto):
-    os.system("cls")
+    os.system("cls" if os.name == "nt" else "clear")
     print(texto)
     print()
 
+
+# Quando o usuário selecionar uma opção, as funções acima serão acionadas
 def escolhendo_opção():
 
     try:
@@ -60,16 +86,21 @@ def escolhendo_opção():
             remover_itens()
         elif opçao_escolhida == 4:
             sair()
+            exit()
         else:
             erro()
-    except:
+    except ValueError:
         erro()
 
+# Para que o programa continue rodando, até que o usuário escolha parar
 def main():
-    os.system("cls")
-    exibir_nome_do_programa()
-    mostrando_opções()
-    escolhendo_opção()
+    while True:
+        os.system("cls" if os.name == "nt" else "clear")
+        exibir_nome_do_programa()
+        mostrando_opções()
+        escolhendo_opção()
+        input("\nPressione Enter para continuar...")
+
 
 if __name__ == "__main__":
     main()

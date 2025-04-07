@@ -1,6 +1,6 @@
 # Trabalho de informática, professora Nadya
 # Programa de listas de tarefas em Python
-# Gabriel Victor, Juan Pablo, Kevin Gomes
+# Gabriel, Juan, Kevin, Arthur, Lorrane, Maria Eduarda Malta e Lorena
 
 
 import os
